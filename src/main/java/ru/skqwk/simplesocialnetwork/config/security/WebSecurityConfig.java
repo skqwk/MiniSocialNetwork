@@ -61,12 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/auth", "/register", "/ping")
         .permitAll()
         // аутентифицировать данные запросы
-        .antMatchers("/user/**", "/profile/history")
+        .antMatchers("/profile/edit", "/profile", "/user/**")
         .hasRole(USER.name())
-        .antMatchers("/management/**")
-        .hasRole(MANAGER.name())
-        .antMatchers("/profile/edit", "/profile")
-        .hasAnyRole(MANAGER.name(), USER.name())
         .anyRequest()
         .authenticated()
         .and()

@@ -15,6 +15,6 @@ public class GetMessageDTO {
   private Long from;
   private Long to;
   private String content;
-  private boolean isRead;
+  private Boolean isRead;
   private Instant sentAt;
 }

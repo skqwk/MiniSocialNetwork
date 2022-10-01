@@ -13,6 +13,7 @@ import ru.skqwk.simplesocialnetwork.dto.UserRegisterRequest;
 import ru.skqwk.simplesocialnetwork.enumeration.UserRole;
 import ru.skqwk.simplesocialnetwork.exception.BadInputParametersException;
 import ru.skqwk.simplesocialnetwork.exception.ConflictDataException;
+import ru.skqwk.simplesocialnetwork.exception.ResourceNotFoundException;
 import ru.skqwk.simplesocialnetwork.model.UserAccount;
 import ru.skqwk.simplesocialnetwork.repo.UserRepository;
 import ru.skqwk.simplesocialnetwork.service.UserService;
@@ -58,7 +59,22 @@ public class UserServiceImpl implements UserService {
     return userRepository
         .findById(id)
         .orElseThrow(
-            () -> new UsernameNotFoundException(String.format("User with id: %s - not found", id)));
+            () -> new ResourceNotFoundException(String.format("User with id: %s - not found", id)));
+  }
+
+  /**
+   * Находит пользователя.
+   *
+   * @param email Почтовый адрес пользователя.
+   */
+  @Override
+  public UserAccount findUserByEmail(String email) {
+    return userRepository
+        .findByEmail(email)
+        .orElseThrow(
+            () ->
+                new ResourceNotFoundException(
+                    String.format("User with email: %s - not found", email)));
   }
 
   /**

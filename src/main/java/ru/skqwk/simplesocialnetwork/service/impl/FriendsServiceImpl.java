@@ -28,9 +28,9 @@ public class FriendsServiceImpl implements FriendsService {
   }
 
   @Override
-  public void addFriend(Long id, Long friendId) {
+  public void addFriend(Long id, String emailFriend) {
     UserAccount user1 = userService.findUser(id);
-    UserAccount user2 = userService.findUser(friendId);
+    UserAccount user2 = userService.findUserByEmail(emailFriend);
     friendsRepository.save(Friends.builder().user1(user1).user2(user2).build());
   }
 

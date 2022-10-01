@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Api(tags = "Контроллер добавления друзей")
-public class FriendsController {
+public class FriendsController extends BaseController{
 
   private final FriendsService friendsService;
 
@@ -27,10 +27,10 @@ public class FriendsController {
     return friendsService.getAllFriends(userAccount.getId());
   }
 
-  @PostMapping("/user/friend/{friendId}")
-  @ApiOperation(value = "Добавление друзей текущего пользователя")
+  @PostMapping("/user/friend/{email}")
+  @ApiOperation(value = "Добавление друзей текущему пользователя")
   public void addFriend(
-      @AuthenticationPrincipal UserAccount userAccount, @PathVariable Long friendId) {
-    friendsService.addFriend(userAccount.getId(), friendId);
+      @AuthenticationPrincipal UserAccount userAccount, @PathVariable String email) {
+    friendsService.addFriend(userAccount.getId(), email);
   }
 }

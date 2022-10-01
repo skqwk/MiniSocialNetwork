@@ -44,7 +44,7 @@ public class AuthController extends BaseController {
     return AuthOkResponse.builder().authToken(authToken).build();
   }
 
-  @DeleteMapping("/account")
+  @DeleteMapping("/user/account")
   @ApiOperation(value = "Удаление аккаунта текущего пользователя")
   public void deleteAccount(@AuthenticationPrincipal UserAccount userAccount) {
     userService.deleteAccount(userAccount.getId());

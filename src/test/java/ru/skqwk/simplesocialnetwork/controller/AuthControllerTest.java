@@ -38,8 +38,7 @@ class AuthControllerTest extends BaseControllerTest {
 
     mockMvc
         .perform(
-            delete("/account")
-                .contentType(MediaType.APPLICATION_JSON)
+            delete("/user/account")
                 .header(
                     HttpHeaders.AUTHORIZATION,
                     config.getTokenPrefix() + authOkResponse.getAuthToken()))
@@ -57,7 +56,7 @@ class AuthControllerTest extends BaseControllerTest {
   public void shouldNotDeleteWithoutToken() throws Exception {
 
     mockMvc
-        .perform(delete("/account").contentType(MediaType.APPLICATION_JSON))
+        .perform(delete("/account"))
         .andExpect(status().isUnauthorized());
   }
 

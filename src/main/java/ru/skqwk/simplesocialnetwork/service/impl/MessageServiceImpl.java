@@ -24,9 +24,9 @@ public class MessageServiceImpl implements MessageService {
   private final UserService userService;
 
   @Override
-  public List<GetMessageDTO> getAllMessages(Long fromId, Long toId) {
+  public List<GetMessageDTO> getAllMessages(Long fromId, String userEmail) {
     UserAccount from = userService.findUser(fromId);
-    UserAccount to = userService.findUser(toId);
+    UserAccount to = userService.findUserByEmail(userEmail);
 
     List<Message> messages = new ArrayList<>(messageRepository.findAllByFromAndTo(from, to));
     List<Message> readMessages =
@@ -42,10 +42,9 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public void sentMessage(Long fromId, Long toId, MessageDTO message) {
+  public void sentMessage(Long fromId, String userEmail, MessageDTO message) {
     UserAccount from = userService.findUser(fromId);
-    UserAccount to = userService.findUser(toId);
-
+    UserAccount to = userService.findUserByEmail(userEmail);
     messageRepository.save(
         Message.builder()
             .from(from)

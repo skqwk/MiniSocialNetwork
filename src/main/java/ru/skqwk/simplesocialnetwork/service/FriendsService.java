@@ -7,5 +7,5 @@ import java.util.List;
 public interface FriendsService {
   List<FriendDTO> getAllFriends(Long id);
 
-  void addFriend(Long id, Long friendId);
+  void addFriend(Long id, String email);
 }

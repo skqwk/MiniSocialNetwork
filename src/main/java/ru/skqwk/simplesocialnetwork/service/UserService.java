@@ -8,6 +8,8 @@ import ru.skqwk.simplesocialnetwork.model.UserAccount;
 public interface UserService extends UserDetailsService {
   UserAccount findUser(Long id);
 
+  UserAccount findUserByEmail(String email);
+
   void addNewUser(UserRegisterRequest registerRequest);
 
   void deleteAccount(Long id);

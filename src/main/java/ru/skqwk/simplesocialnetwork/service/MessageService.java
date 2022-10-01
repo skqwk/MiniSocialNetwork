@@ -6,7 +6,7 @@ import ru.skqwk.simplesocialnetwork.dto.MessageDTO;
 import java.util.List;
 
 public interface MessageService {
-  List<GetMessageDTO> getAllMessages(Long fromId, Long toId);
+  List<GetMessageDTO> getAllMessages(Long fromId, String userEmail);
 
-  void sentMessage(Long fromId, Long toId, MessageDTO message);
+  void sentMessage(Long fromId, String userEmail, MessageDTO message);
 }

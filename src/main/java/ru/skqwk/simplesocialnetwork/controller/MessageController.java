@@ -19,23 +19,23 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Api(tags = "Контроллер работы с сообщениями")
-public class MessageController {
+public class MessageController extends BaseController {
 
   private final MessageService messageService;
 
-  @GetMapping("/user/messages/{friendId}")
+  @GetMapping("/user/messages/{userEmail}")
   @ApiOperation(value = "Получение списка сообщений текущего пользователя")
   public List<GetMessageDTO> getAllMessages(
-      @AuthenticationPrincipal UserAccount userAccount, @PathVariable Long friendId) {
-    return messageService.getAllMessages(userAccount.getId(), friendId);
+      @AuthenticationPrincipal UserAccount userAccount, @PathVariable String userEmail) {
+    return messageService.getAllMessages(userAccount.getId(), userEmail);
   }
 
-  @PostMapping("/user/message/{friendId}")
+  @PostMapping("/user/message/{userEmail}")
   @ApiOperation(value = "Отправка сообщений другому пользователю")
   public void sentMessage(
       @AuthenticationPrincipal UserAccount userAccount,
-      @PathVariable Long friendId,
+      @PathVariable String userEmail,
       @RequestBody MessageDTO message) {
-    messageService.sentMessage(userAccount.getId(), friendId, message);
+    messageService.sentMessage(userAccount.getId(), userEmail, message);
   }
 }
